@@ -9,6 +9,7 @@ const Books = () => {
     useEffect(() => {
         const fetchBooks = async () => {
         const res = await axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${process.env.REACT_APP_BOOKS_API_KEY}`)
+        setBooks(res.data.results.books)
         console.log(res.data.results.books);
         }
 
@@ -16,9 +17,28 @@ const Books = () => {
     }, [])
 
   return (
-    <div>
+    <>
         <h1>Books</h1>
-    </div>
+        <section>
+            {books.map((book) => {
+                const {age_group, author, book_image, buy_links, description, price, primary_isbn10, publisher, rank, title} = book
+
+                return (
+                    <article key={rank}>
+                        <div>
+                            <img src={book_image} alt={title} />
+                        </div>
+
+                        <div>
+                            <h3>{title}</h3>
+                            <p>{description}</p>
+                        </div>
+                    </article>
+                )
+
+            })}
+        </section>
+    </>
   )
 }
 
