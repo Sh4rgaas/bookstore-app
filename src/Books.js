@@ -18,28 +18,45 @@ const Books = () => {
 
   return (
     <>
-        <h1>Books</h1>
-        <section>
+        <h1 className='font-bold text-center text-4xl py-5'>Books</h1>
+        <section className='grid grid-cols-1 gap-10 px-5'>
             {books.map((book) => {
-                const {age_group, author, book_image, buy_links, description, price, primary_isbn10, publisher, rank, title} = book
+                const {author, book_image, buy_links, description, primary_isbn10, publisher, rank, title} = book
 
                 return (
                     <article key={rank}>
                         <div>
-                            <img src={book_image} alt={title} />
+                            <img src={book_image} alt={title} className="block mx-auto w-1/2" />
                         </div>
 
                         <div>
-                            <h3>{title}</h3>
-                            <p>{description}</p>
+                            <h3 className='font-bold my-2 text-font-2xl'>{title}</h3>
+                            <p className='mb-4'>{description}</p>
+                            <p><span className='font-bold'>Author: </span> {author}</p>
                         </div>
+
+                        <ul>
+                            <li><span className='font-bold'>Publisher: </span> {publisher}</li>
+                            <li><span className='font-bold'>ISBN: </span> {primary_isbn10}</li>
+                        </ul>
+
+                        <ul>
+                        <p>Buy now!</p>
+                            {buy_links.map((link) => {
+                                const {name, url} = link
+                                return (
+                                <div key={name}>
+                                    <a href={url}>{name}</a>
+                                </div>
+                                )
+                            })}
+                        </ul>
                     </article>
                 )
-
             })}
         </section>
     </>
   )
 }
 
-export default Books
+export default Books;
