@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaExternalLinkSquareAlt } from 'react-icons/fa';
 import axios from 'axios';
 
 const Books = () => {
@@ -19,12 +20,12 @@ const Books = () => {
   return (
     <>
         <h1 className='font-bold text-center text-4xl py-5'>Books</h1>
-        <section className='grid grid-cols-1 gap-10 px-5'>
+        <section className='grid grid-cols-1 gap-10 px-5 sm:grid-cols-2'>
             {books.map((book) => {
                 const {author, book_image, buy_links, description, primary_isbn10, publisher, rank, title} = book
 
                 return (
-                    <article key={rank}>
+                    <article key={rank} className="bg-gray-100 py-5 px-10 rounded-lg sm:px-5">
                         <div>
                             <img src={book_image} alt={title} className="block mx-auto w-1/2" />
                         </div>
@@ -35,18 +36,18 @@ const Books = () => {
                             <p><span className='font-bold'>Author: </span> {author}</p>
                         </div>
 
-                        <ul>
+                        <ul className='mb-4'>
                             <li><span className='font-bold'>Publisher: </span> {publisher}</li>
                             <li><span className='font-bold'>ISBN: </span> {primary_isbn10}</li>
                         </ul>
 
                         <ul>
-                        <p>Buy now!</p>
+                        <h3 className='font-bold text-xl'>Buy now!</h3>
                             {buy_links.map((link) => {
                                 const {name, url} = link
                                 return (
                                 <div key={name}>
-                                    <a href={url}>{name}</a>
+                                    <a className='flex items-center' href={url} target="_blank" rel="noopener noreferrer">{name} <FaExternalLinkSquareAlt className='ml-1' /></a>
                                 </div>
                                 )
                             })}
