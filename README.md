@@ -1,4 +1,4 @@
-<b><u>Challenges</b></u>
+<h1>Challenges</h1>
 
 * Responsive Design
 * API Integration
